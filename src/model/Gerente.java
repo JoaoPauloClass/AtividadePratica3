@@ -1,8 +1,7 @@
 package model;
 
-import controller.Trabalhavel;
 
-public class Gerente extends Funcionario implements Trabalhavel{
+public class Gerente extends Funcionario{
 
     private String equipe;
     private float bonusAnual; //Valor inteiro do bonus, ele ganhará durante o andamento do o ano o valor
@@ -40,7 +39,7 @@ public class Gerente extends Funcionario implements Trabalhavel{
     public String toString() {
         return "\n-- GERENTE --" + super.toString() + 
                 "\nEquipe sob gerência: " + equipe + 
-                "\nBonus Anual" + bonusAnual;
+                "\nBonus Anual: R$" + bonusAnual;
     }
 
 

@@ -1,11 +1,11 @@
 package view;
 
-import java.net.Socket;
 import java.util.ArrayList;
 
 import controller.ListaFuncionarios;
 import model.Desenvolvedor;
 import model.Estagiario;
+import model.Funcionario;
 import model.Gerente;
 
 public class Sistema {
@@ -37,15 +37,15 @@ public class Sistema {
                 case 2:
                     buscarFuncionario();
                     break;
-                // case 3:
-                //     excluirFuncionario();
-                //     break;
-                // case 4:
-                //     listarFuncionarios();
-                //     break;
-                // case 5:
-                //     menuFuncionarios();
-                //     break;
+                case 3:
+                    excluirFuncionario();
+                    break;
+                case 4:
+                    listarFuncionarios();
+                    break;
+                case 5:
+                    menuFuncionarios();
+                    break;
                 case 0:
                     System.out.println("Encerrando sistema.");
                     break;
@@ -109,7 +109,7 @@ public class Sistema {
         horasTrababalhadas = Console.lerFloat();
         System.out.print("Valor hora: ");
         valorHora = Console.lerFloat();
-        System.out.println("Equipe: ");
+        System.out.print("Equipe: ");
         equipe = Console.lerString();
         System.out.print("Bonus Anual (R$): ");
         bonusAnual = Console.lerFloat();
@@ -143,11 +143,11 @@ public class Sistema {
             aux ++;
             System.out.printf("Tencnologia %d: ", aux);
             op = Console.lerString();
-            if (!op.equals("SAIR")) {
+            if (!op.equalsIgnoreCase("SAIR")) {
                 tecnologiasDominadas.add(op);
             }
             
-        } while (!op.equals("SAIR"));
+        } while (!op.equalsIgnoreCase("SAIR"));
         
         
         Desenvolvedor d1 = new Desenvolvedor(nome, matricula, horasTrababalhadas, valorHora, tecnologiasDominadas);
@@ -188,7 +188,7 @@ public class Sistema {
             System.out.println("\n\nBuscar por");
             System.out.println("1) Nome");
             System.out.println("2) Matricula");
-            System.out.println("0) Cancelar");
+            System.out.println("0) Voltar");
             System.out.print(">> ");
             op = Console.lerInt();
 
@@ -218,5 +218,107 @@ public class Sistema {
         } while(op != 0);
     }
 
+    private static void excluirFuncionario(){
+        int op;
+        do {
+            System.out.println("\n\nExcluir por");
+            System.out.println("1) Nome");
+            System.out.println("2) Matricula");
+            System.out.println("0) Voltar");
+            System.out.print(">> ");
+            op = Console.lerInt();
+
+            switch (op) {
+                case 1:
+                    String nome = "";
+                    System.out.println("Digite o nome do funcionário: ");
+                    nome = Console.lerString();
+            
+                    if (ListaFuncionarios.removerFuncionario(nome)) {
+                        System.out.println("Funcionário removido!");
+                    }else{
+                        System.out.println("ERRO! Não foi possivel remover o funcionário");
+                    }
+
+                    break;
+                case 2:
+                    int matricula;
+                    System.out.println("Digite a matricula do funcionário: ");
+                    matricula = Console.lerInt();
+            
+                    if (ListaFuncionarios.removerFuncionario(matricula)) {
+                        System.out.println("Funcionário removido!");
+                    }else{
+                        System.out.println("ERRO! Não foi possivel remover o funcionário");
+                    }
+                    break;
+   
+                case 0:
+                    System.out.println("Cancelando operação.");
+                    break;
+                default:
+                    System.out.println("Opção inválida, tente novamente");
+                    break;
+            }
+        } while(op != 0);
+    }
+
+    private static void listarFuncionarios(){
+        for (Funcionario funcionario : ListaFuncionarios.getListaFuncionarios()) {
+            System.out.println(funcionario);
+        }
+    }
+
+    private static void menuFuncionarios(){
+
+        int op;
+        do {
+            int matricula;
+            System.out.println("Digite a matricula do funcionário (0 para sair): ");
+            matricula = Console.lerInt();
+
+            
+
+            Funcionario tempFuncionario = ListaFuncionarios.buscarFuncionario(matricula);
+            if (matricula == 0) {
+                break;
+            } else if (tempFuncionario == null) {
+                System.out.println("Funcionario não encontrado!");
+                break;
+            }
+
+            System.out.println("Funcionário: " + tempFuncionario.getNome());
+
+            System.out.println("\n\nSelecione uma opção");
+            System.out.println("1) Ver progresso");
+            System.out.println("2) Adicionar horas");
+            System.out.println("0) Voltar");
+            System.out.print(">> ");
+            op = Console.lerInt();
+            
+            switch (op) {
+                case 1:
+
+                    tempFuncionario.relatarProgresso();;     
+                
+                    break;
+                case 2:
+                    System.out.println("Quantas horas deseja adicionar?");
+                    System.err.print(">> ");
+                    int horas = Console.lerInt();
+
+                    tempFuncionario.trabalhar(horas);                    
+                    break;
+   
+                case 0:
+                    System.out.println("Cancelando operação.");
+                    break;
+                default:
+                    System.out.println("Opção inválida, tente novamente");
+                    break;
+            }
+        } while(op != 0);
+
+    }
 
 }

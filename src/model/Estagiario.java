@@ -1,8 +1,6 @@
 package model;
 
-import controller.Trabalhavel;
-
-public class Estagiario extends Funcionario implements Trabalhavel{
+public class Estagiario extends Funcionario{
     
     private String supervisor;
     private int jornadaDiaria;

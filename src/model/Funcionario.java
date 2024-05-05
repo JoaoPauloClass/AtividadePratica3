@@ -1,5 +1,8 @@
 package model;
-public abstract class Funcionario {
+
+import controller.Trabalhavel;
+
+public abstract class Funcionario implements Trabalhavel{
 
     protected String nome;
     protected int matricula;

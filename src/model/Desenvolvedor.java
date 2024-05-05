@@ -2,9 +2,7 @@ package model;
 
 import java.util.ArrayList;
 
-import controller.Trabalhavel;
-
-public class Desenvolvedor extends Funcionario implements Trabalhavel {
+public class Desenvolvedor extends Funcionario{
     
     // private String[] tecnologiasDominadas;
     private ArrayList<String> tecnologiasDominadas = new ArrayList<>();

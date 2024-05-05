@@ -42,7 +42,19 @@ public class ListaFuncionarios {
     public static boolean removerFuncionario(String nome){
 
         for (Funcionario funcionario : listaFuncionarios) {
-            if (funcionario.getNome() == nome) {
+            if (funcionario.getNome().equals(nome)) {
+                listaFuncionarios.remove(funcionario);
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public static boolean removerFuncionario(int matricula){
+
+        for (Funcionario funcionario : listaFuncionarios) {
+            if (funcionario.getMatricula() == matricula) {
                 listaFuncionarios.remove(funcionario);
                 return true;
             }
