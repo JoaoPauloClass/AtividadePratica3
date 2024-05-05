@@ -1,4 +1,8 @@
-public class Gerente extends Funcionario{
+package model;
+
+import controller.Trabalhavel;
+
+public class Gerente extends Funcionario implements Trabalhavel{
 
     private String equipe;
     private float bonusAnual; //Valor inteiro do bonus, ele ganhará durante o andamento do o ano o valor
@@ -37,5 +41,22 @@ public class Gerente extends Funcionario{
         return "\n-- GERENTE --" + super.toString() + 
                 "\nEquipe sob gerência: " + equipe + 
                 "\nBonus Anual" + bonusAnual;
+    }
+
+
+    @Override
+    public void trabalhar(float horas){
+
+        this.horasTrababalhadas += horas;
+
+        System.out.println(horas + "h adicionadas às horas trabalhadas do gerente " + nome);
+
+    }
+
+    @Override
+    public void relatarProgresso(){
+
+        System.out.println("O gerente "+ nome + " trabalhou " + horasTrababalhadas + "h esse mês");
+
     }
 }

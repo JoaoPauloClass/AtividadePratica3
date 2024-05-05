@@ -1,3 +1,4 @@
+package model;
 public abstract class Funcionario {
 
     protected String nome;
@@ -58,7 +59,8 @@ public abstract class Funcionario {
         return "\nMatrícula: " + matricula +
         "\nNome: " + nome +
         "\nValor da hora: R$ " + valorHora +
-        "\nHoras trabalhadas: " + horasTrababalhadas + "h";
+        "\nHoras trabalhadas: " + horasTrababalhadas + "h" +
+        "\nSalário: R$" + calcularSalario();
     }
 
 }

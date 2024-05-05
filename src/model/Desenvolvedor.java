@@ -1,18 +1,25 @@
-public class Desenvolvedor extends Funcionario {
+package model;
+
+import java.util.ArrayList;
+
+import controller.Trabalhavel;
+
+public class Desenvolvedor extends Funcionario implements Trabalhavel {
     
-    private String[] tecnologiasDominadas;
+    // private String[] tecnologiasDominadas;
+    private ArrayList<String> tecnologiasDominadas = new ArrayList<>();
 
     public Desenvolvedor(String nome, int matricula, float horasTrababalhadas, float valorHora,
-            String[] tecnologiasDominadas) {
+            ArrayList<String> tecnologiasDominadas) {
         super(nome, matricula, horasTrababalhadas, valorHora);
         this.tecnologiasDominadas = tecnologiasDominadas;
     }
 
-    public String[] getTecnologiasDominadas() {
+    public ArrayList<String> getTecnologiasDominadas() {
         return tecnologiasDominadas;
     }
 
-    public void setTecnologiasDominadas(String[] tecnologiasDominadas) {
+    public void setTecnologiasDominadas(ArrayList<String> tecnologiasDominadas) {
         this.tecnologiasDominadas = tecnologiasDominadas;
     }
     
@@ -37,6 +44,22 @@ public class Desenvolvedor extends Funcionario {
 
         return "\n-- DESENVOLVEDOR --" + super.toString() + 
                 "\nTecnologias dominadas: " + txt;
+    }
+
+    @Override
+    public void trabalhar(float horas){
+
+        this.horasTrababalhadas += horas;
+
+        System.out.println(horas + "h adicionadas às horas trabalhadas do desenvolvedor " + nome);
+
+    }
+
+    @Override
+    public void relatarProgresso(){
+
+        System.out.println("O desenvolvedor "+ nome + " trabalhou " + horasTrababalhadas + "h esse mês");
+
     }
     
 }
